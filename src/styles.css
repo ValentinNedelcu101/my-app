@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+.copyright {
+    font-family: "Inter", -apple-system, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"
+    , "Segoe UI Symbol";
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:1rem;
+    box-sizing: inherit;
+    position:relative;
+}
+
+.numeric-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+input {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: solid 1px gray;
+    
+}
+
+input.valid {
+    border: solid 5px green;
+}
+input.invalid {
+    border: solid 5px red;
+}
