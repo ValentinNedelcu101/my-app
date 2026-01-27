@@ -3,11 +3,14 @@ import { Product } from '../product';
 import { ProductDetail } from '../product-detail/product-detail';
 import { SortPipe } from '../sort-pipe';
 import { ProductsService } from '../products.service';
+import { Favorites } from '../favorites/favorites';
+import { ProductView } from '../product-view/product-view';
 @Component({
   selector: 'app-product-list',
-  imports: [ProductDetail, SortPipe],
+  imports: [ProductDetail, SortPipe, Favorites, ProductView],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
+  providers: [ProductsService],
 })
 export class ProductList implements OnInit {
   products: Product[]= [];

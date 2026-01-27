@@ -3,14 +3,9 @@
     <ul class="pill-group">
     @for (product of products |sort:"price"; track product.id; let i= $index) {
         <li class="pill" (click)="selectedProduct = product">{{i+1}}.
-            @switch(product.title){
-                @case ("Keyboard") {⌨️}
-                @case ("Microphone") {🎙️}
-                @case ("Web camera") {📷}
-                @default {💊}
-            } 
-            {{product.title}}</li>
-    }
+            <app-product-view [id]="product.id"></app-product-view>
+            </li> }
+    
     @empty {
         <p>No products found!</p>
     }
@@ -20,3 +15,5 @@
 @else{
     <p>No products found!</p>
 }
+<h1>Favorites</h1>
+<app-favorites></app-favorites>
