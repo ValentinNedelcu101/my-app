@@ -1,5 +1,8 @@
 # MyApp
-
+This project is followed, step by step, by the book:
+Learning Angular - Fifth Edition
+By : Aristeidis Bampakos
+His repository: https://github.com/PacktPublishing/Learning-Angular-Fifth-Edition
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
 
 ## Development server
