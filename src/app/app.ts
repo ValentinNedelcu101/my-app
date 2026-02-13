@@ -4,6 +4,7 @@ import { ProductList } from "./product-list/product-list";
 import { Copyright } from './copyright';
 import { Numeric } from './numeric';
 import { APP_SETTINGS, appSettings } from './app.settings';
+import { Observable, timestamp } from 'rxjs';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, ProductList, Copyright, Numeric],
@@ -16,25 +17,31 @@ import { APP_SETTINGS, appSettings } from './app.settings';
 export class App {
   title = "World";
   settings = inject(APP_SETTINGS);
+  title$ = new Observable(observer => {
+    setInterval(() => {
+      observer.next(null);
+    }, 2000);
+  }); 
 
   private setTitle = () => {
-    this.title = this.settings.title;
+    const timestamp = new Date();
+    this.title = `${this.settings.title}(${timestamp})`;
   }
   private changeTitle(callback: Function) {
     setTimeout( () => {
       callback()
     }, 2000);
   }
-  onComplete(){
+  private onComplete(){
     return new Promise<void>(resolve => {
-      setTimeout( () => {
+      setInterval( () => {
         resolve();
       },2000)
     });
   }
 
   constructor() {
-    this.onComplete().then(this.setTitle);
+    this.title$.subscribe(this.setTitle);
   }
 
 
