@@ -1,8 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, OnDestroy,DestroyRef } from '@angular/core';
 import { Product } from '../product';
 import { ProductDetail } from '../product-detail/product-detail';
 import { SortPipe } from '../sort-pipe';
 import { ProductsService } from '../products.service';
+import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-product-list',
   imports: [ProductDetail, SortPipe],
@@ -11,6 +13,7 @@ import { ProductsService } from '../products.service';
   providers: [ProductsService],
 })
 export class ProductList implements OnInit {
+  private destroyRef = inject(DestroyRef);
   products: Product[]= [];
   selectedProduct:Product |undefined =this.products[0];
   onAdded(){
@@ -22,9 +25,8 @@ export class ProductList implements OnInit {
   }
 
   private getProducts() {
-  this.productService.getProducts().subscribe(products => {
+  this.productService.getProducts().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(products => {
     this.products = products;
   });
 }
-
 }
