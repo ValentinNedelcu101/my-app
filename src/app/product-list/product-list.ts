@@ -3,11 +3,9 @@ import { Product } from '../product';
 import { ProductDetail } from '../product-detail/product-detail';
 import { SortPipe } from '../sort-pipe';
 import { ProductsService } from '../products.service';
-import { Favorites } from '../favorites/favorites';
-import { ProductView } from '../product-view/product-view';
 @Component({
   selector: 'app-product-list',
-  imports: [ProductDetail, SortPipe, Favorites, ProductView],
+  imports: [ProductDetail, SortPipe],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
   providers: [ProductsService],
@@ -20,6 +18,13 @@ export class ProductList implements OnInit {
   }
   private productService = inject(ProductsService);
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.getProducts();
   }
+
+  private getProducts() {
+  this.productService.getProducts().subscribe(products => {
+    this.products = products;
+  });
+}
+
 }
