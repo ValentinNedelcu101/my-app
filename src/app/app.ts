@@ -22,11 +22,12 @@ export class App {
     setInterval(() => {
       observer.next(null);
     }, 2000);
-  }); 
+  });
+  currentDate = signal(new Date()); 
 
   private setTitle = () => {
-    const timestamp = new Date();
-    this.title = `${this.settings.title}(${timestamp})`;
+    const timestamp = this.currentDate.set(new Date());
+    this.title = `${this.settings.title}(${this.currentDate()})`;
   }
   private changeTitle(callback: Function) {
     setTimeout( () => {
