@@ -13,15 +13,19 @@ import { takeUntilDestroyed,toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './product-list.css',
   providers: [ProductsService],
 })
-export class ProductList  {
-  products = toSignal(inject(ProductsService).getProducts(), {
-    initialValue: []
-  });
+export class ProductList implements OnInit  {
+  products$: Observable<Product[]> | undefined;
   selectedProduct:Product |undefined ;
   onAdded(){
     alert(`${this.selectedProduct?.title} added to the cart`)
   }
-  
+  ngOnInit(): void {
+    this.getProducts();
+  }
 
- 
+  private getProducts() {
+    this.products$ = this.productService.getProducts();
+  }
+
+   constructor(private productService: ProductsService) {}
 }
