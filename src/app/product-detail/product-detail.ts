@@ -17,7 +17,10 @@ export class ProductDetail implements OnChanges {
   addToCart(){
     this.added.emit();
   }
-  
+  changePrice(product: Product, price:string){
+    this.productService.updateProduct(product.id, Number(price)).subscribe();
+  }
+
   constructor(private productService: ProductsService){
   }
   ngOnChanges(): void {

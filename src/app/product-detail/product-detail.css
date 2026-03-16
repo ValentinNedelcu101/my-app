@@ -48,3 +48,9 @@ button:hover{
     letter-spacing: -0.00875rem;
     text-decoration: none;
   }
+
+  button.secondary{
+    display: inline;
+    margin-left: 5px;
+    --button-accent: var(--vivid-pink);
+  }
