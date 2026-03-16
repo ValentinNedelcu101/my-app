@@ -14,13 +14,18 @@ export class ProductDetail implements OnChanges {
   id = input<number>();
   product$: Observable<Product> | undefined;
   added = output();
+  deleted = output();
   addToCart(){
     this.added.emit();
   }
   changePrice(product: Product, price:string){
     this.productService.updateProduct(product.id, Number(price)).subscribe();
   }
-
+  remove(product:Product){
+    this.productService.deleteProduct(product.id).subscribe(() => {
+      this.deleted.emit();
+    })
+  }
   constructor(private productService: ProductsService){
   }
   ngOnChanges(): void {
