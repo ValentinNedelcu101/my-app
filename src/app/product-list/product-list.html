@@ -5,9 +5,9 @@
     <ul class="pill-group">
     @for (product of products |sort:"price"; track product.id; let i= $index) {
         <li class="pill" (click)="selectedProduct = product">{{i+1}}.
-            @switch (product.title) {
-        @case ('Keyboard') { ⌨️ }
-        @case ('Microphone') { 🎙️ }
+        @switch (product.category) {
+        @case ('electronics') { ⌨️ }
+        @case ('jewelery') { 💎 }
         @default { 🏷️ }
       }
       {{product.title}}
@@ -17,6 +17,7 @@
         <p>No products found!</p>
     }
     </ul>
-    <app-product-detail [product]="selectedProduct" (added)="onAdded()"></app-product-detail>
+    <app-product-detail [id]="selectedProduct?.id" (added)="onAdded()"></app-product-detail>
 
 
+    <app-product-create></app-product-create>

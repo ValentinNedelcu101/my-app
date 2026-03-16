@@ -1,6 +1,8 @@
 import {ChangeDetectionStrategy, Component, input, output, ViewEncapsulation, OnChanges, SimpleChanges, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../product';
+import { Observable } from 'rxjs';
+import { ProductsService } from '../products.service';
 @Component({
   selector: 'app-product-detail',
   imports: [CommonModule],
@@ -9,25 +11,17 @@ import { Product } from '../product';
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ProductDetail implements OnChanges {
-  product = input<Product>();
+  id = input<number>();
+  product$: Observable<Product> | undefined;
   added = output();
   addToCart(){
     this.added.emit();
   }
-  get productTitle(){
-    return this.product()!.title;
+  
+  constructor(private productService: ProductsService){
   }
-  constructor(){
-    console.log('Product:', this.product());
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    const product = changes['product'];
-    if(!product.isFirstChange()){
-    const oldValue = product.previousValue;
-    const newValue = product.currentValue;
-    console.log('Old value', oldValue);
-    console.log('New value', newValue);
+  ngOnChanges(): void {
+    this.product$ = this.productService.getProduct(this.id()!);
   }
 }
 
-}
