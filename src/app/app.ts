@@ -6,9 +6,10 @@ import { Numeric } from './numeric';
 import { KeyLogger } from './key-logger/key-logger';
 import { APP_SETTINGS, appSettings } from './app.settings';
 import { Observable, timestamp } from 'rxjs';
+import { Auth } from './auth/auth';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductList, Copyright, Numeric,KeyLogger],
+  imports: [RouterOutlet, ProductList, Copyright, Numeric,KeyLogger, Auth],
   templateUrl: './app.html',
   styleUrl: './app.css',
   
