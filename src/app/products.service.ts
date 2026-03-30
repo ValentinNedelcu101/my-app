@@ -3,7 +3,9 @@ import { Injectable, inject } from '@angular/core';
 import { Product } from './product';
 import {map, Observable, of,tap} from "rxjs";
 import { APP_SETTINGS } from './app.settings';
-@Injectable()
+@Injectable({
+  providedIn:'root'
+})
 
 export class ProductsService {
   private productsUrl = inject(APP_SETTINGS).apiUrl + '/products';

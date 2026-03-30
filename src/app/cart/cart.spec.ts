@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KeyLogger } from './key-logger';
+import { Cart } from './cart';
 
-describe('KeyLogger', () => {
-  let component: KeyLogger;
-  let fixture: ComponentFixture<KeyLogger>;
+describe('Cart', () => {
+  let component: Cart;
+  let fixture: ComponentFixture<Cart>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [KeyLogger]
+      imports: [Cart]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(KeyLogger);
+    fixture = TestBed.createComponent(Cart);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,12 +9,18 @@
 
 
 <header> 
-  {{settings.title}} 
+  <h2>{{settings.title}} </h2>
+  <span class="spacer"></span>
+  <div class="menu-links">
+    <a routerLink="/products">Products</a>
+    <a routerLink="/cart">Cart</a>
+    <a routerLink="/products/new">Create</a>
+  </div>
   <app-auth></app-auth>
 </header>
 <main class="main">
   <div class="content">
-    <app-product-list></app-product-list>
+    <router-outlet />
   </div>
 </main>
 
@@ -25,9 +31,5 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
- <div class="numeric-container">
-<input appNumeric />
- </div>
+
 <footer appCopyright> -v{{ settings.version }}</footer>
-<router-outlet />
-<app-key-logger [numeric]="true"></app-key-logger>
