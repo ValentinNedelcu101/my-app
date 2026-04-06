@@ -11,14 +11,18 @@ export class ProductsService {
   private productsUrl = inject(APP_SETTINGS).apiUrl + '/products';
   private products: Product[] = [];
 
-  getProducts(): Observable<Product[]> {
-    const options = new HttpParams().set('limit', 10);
-    return this.http.get<Product[]>(this.productsUrl, {
-      params: options
-    }).pipe(map(products => {
-      this.products = products;
-      return products;
-    }));
+  getProducts(limit?:number): Observable<Product[]> {
+    console.log(this.products)
+    if(this.products.length===0){
+      const options = new HttpParams().set('limit',limit || 10);
+      return this.http.get<Product[]>(this.productsUrl, {
+        params: options
+      }).pipe(map(products => {
+        this.products = products;
+        return products;
+      }));
+    }
+    return of(this.products);
   }
 
   getProduct(id:number): Observable<Product> {

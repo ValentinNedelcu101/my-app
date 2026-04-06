@@ -174,3 +174,8 @@
       margin-block: 1.5rem;
     }
   }
+
+.menu-links a.active {
+  color: var(--electric-violet);
+}
+

@@ -1,5 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
-import { RouterOutlet, RouterLinkWithHref, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLinkWithHref, RouterLink, RouterLinkActive } from '@angular/router';
 import { Copyright } from './copyright';
 import { APP_SETTINGS, appSettings } from './app.settings';
 import { Auth } from './auth/auth';
@@ -10,7 +10,8 @@ import { Auth } from './auth/auth';
     Copyright, 
     Auth, 
     RouterLinkWithHref,
-    RouterLink
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',

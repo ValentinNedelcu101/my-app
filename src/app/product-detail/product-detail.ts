@@ -1,36 +1,40 @@
-import {ChangeDetectionStrategy, Component, input, output, ViewEncapsulation, OnChanges, SimpleChanges, } from '@angular/core';
+import {Component, input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Product } from '../product';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { ProductsService } from '../products.service';
 import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-product-detail',
   imports: [CommonModule],
   templateUrl: './product-detail.html',
-  styleUrl: './product-detail.css',
-  changeDetection:ChangeDetectionStrategy.OnPush
+  styleUrl: './product-detail.css'
 })
-export class ProductDetail implements OnChanges {
-  id = input<number>();
+export class ProductDetail implements OnInit {
+  id = input<string>();
   product$: Observable<Product> | undefined;
-  added = output();
-  deleted = output();
   addToCart(){
-    this.added.emit();
   }
   changePrice(product: Product, price:string){
-    this.productService.updateProduct(product.id, Number(price)).subscribe();
+    this.productService.updateProduct(product.id, Number(price)).subscribe(() => {
+    this.router.navigate(['/products']);
+  });
   }
   remove(product:Product){
     this.productService.deleteProduct(product.id).subscribe(() => {
-      this.deleted.emit();
-    })
+    this.router.navigate(['/products']);
+  })
   }
-  constructor(private productService: ProductsService, public authService: AuthService){
-  }
-  ngOnChanges(): void {
-    this.product$ = this.productService.getProduct(this.id()!);
+  constructor(
+    private productService: ProductsService, 
+    public authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  )
+  {}
+  ngOnInit(): void {
+    this.product$ = this.productService.getProduct(Number(this.id()!));
   }
 }
 
