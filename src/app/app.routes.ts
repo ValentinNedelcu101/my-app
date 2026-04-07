@@ -3,13 +3,20 @@ import { ProductList } from './product-list/product-list';
 import { Cart } from './cart/cart';
 import { ProductCreate } from './product-create/product-create';
 import { ProductDetail } from './product-detail/product-detail';
+import { authGuard } from './auth-guard';
+import { checkoutGuard } from './checkout-guard';
 
 export const routes: Routes = [
     
     {path: 'products/new', component: ProductCreate},
     {path:'products/:id', component:ProductDetail},
     {path: 'products', component: ProductList},
-    {path: 'cart', component:Cart},
+    {
+        path: 'cart', 
+        component:Cart,
+        canActivate: [authGuard],
+        canDeactivate: [checkoutGuard]
+    },
     { path: '', redirectTo: 'products', pathMatch: 'full' },
     { path: '**', redirectTo: 'products' }
 
