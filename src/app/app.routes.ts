@@ -24,6 +24,11 @@ export const routes: Routes = [
         canActivate: [authGuard],
         canDeactivate: [checkoutGuard]
     },
+    {
+        path: 'user', 
+        loadChildren: () => import('./user.routes'),
+        canMatch: [authGuard]
+    },
     { path: '', redirectTo: 'products', pathMatch: 'full' },
     { path: '**', redirectTo: 'products' }
 

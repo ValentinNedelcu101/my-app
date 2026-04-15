@@ -1,21 +1,35 @@
 <h1>Add new product</h1>
-<div>
-  <label for="title">Title</label>
-  <input id="title" #title />
-</div>
-<div>
-  <label for="price">Price</label>
-  <input id="price" #price type="number" />
-</div>
-<div>
-  <label for="category">Category</label>
-  <select id="category" #category>
-    <option>Select a category</option>
-    <option value="electronics">Electronics</option>
-    <option value="jewelery">Jewelery</option>
-    <option>Other</option>
-  </select>
-</div>
-<div>
-  <button (click)="createProduct(title.value, price.value, category.value)">Create</button>
-</div>
+<form [formGroup]="productForm!" (ngSubmit)="createProduct()">
+
+  <div>
+    <label for="title">Title</label>
+    <input formControlName="title" id="title" />
+  </div>
+  <div>
+    <label for="price">Price</label>
+    <input  formControlName="price" id="price" type="number" />
+  </div>
+  <div>
+    <label for="category">Category</label>
+    <select formControlName="category" id="category" >
+      <option>Select a category</option>
+      <option value="electronics">Electronics</option>
+      <option value="jewelery">Jewelery</option>
+      <option>Other</option>
+    </select>
+  </div>
+  <h2>Additional details</h2>
+  <form formGroupName="extra">
+    <div>
+      <label for="descr">Description</label>
+      <input id="descr" formControlName="description" />
+    </div>
+    <div>
+      <label for="photo">Photo URL</label>
+      <input id="photo" formControlName="image" />
+    </div>
+  </form>
+  <div>
+    <button type="submit">Create</button>
+  </div>
+</form>
