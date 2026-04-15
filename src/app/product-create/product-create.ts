@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { 
+  FormControl, 
+  FormGroup, 
+  ReactiveFormsModule, 
+  FormBuilder, 
+  Validators 
+} from '@angular/forms';
 
 
 @Component({
@@ -12,11 +18,17 @@ import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder } from '@angul
 })
 export class ProductCreate implements OnInit {
 
-  productForm: FormGroup<{
-    title: FormControl<string>,
-    price: FormControl<number | undefined>,
-    category: FormControl<string>
-  }> | undefined;
+  productForm = new FormGroup({
+    title: new FormControl('', {
+      nonNullable:true,
+      validators: Validators.required
+    }),
+    price: new FormControl<number | undefined>(undefined, {
+      nonNullable:true,
+      validators: [Validators.required, Validators.min(1)]
+    }),
+    category: new FormControl('', {nonNullable:true})
+  });
 
 
 

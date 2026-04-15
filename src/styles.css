@@ -26,11 +26,11 @@ input {
   border: 1px solid #BDBDBD;
 }
 
-input.valid {
-    border: solid 5px green;
+input.valid, input.ng-dirty.ng-valid {
+    border: solid green;
 }
-input.invalid {
-    border: solid 5px red;
+input.invalid, input.ng-dirty.ng-invalid {
+    border: solid red;
 }
 
 button {
@@ -66,4 +66,14 @@ a {
 label {
   margin-bottom: 4px;
   display: block;
+}
+
+.help-text {
+  display: flex;
+  color: var(--hot-red);
+  font-size: 0.875rem;
+}
+button:disabled {
+  background-color: lightgrey;
+  cursor: not-allowed;
 }
